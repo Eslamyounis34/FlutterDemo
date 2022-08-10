@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 
-class UserMessage {
-  int id;
-  String userName;
-  String userMsg;
+import '../../model/user/user_message.dart';
 
-  UserMessage({required this.id, required this.userName, required this.userMsg});
-}
+
 
 class ChatScreen extends StatelessWidget {
   List<UserMessage> usersList = [

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import '../../shared/components/components.dart';
+
 class LoginScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -19,7 +21,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              const  Text(
+                const Text(
                   'Login',
                   style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
                 ),
@@ -55,34 +57,26 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20.0,
                 ),
-                Container(
-                  width: double.infinity,
-                  child: MaterialButton(
-                    onPressed: () {
-                      print(emailController.text);
-                      print(passwordController.text);
-                    },
-                    color: Colors.blue,
-                    padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
+                defaultButton(
+                    width: double.infinity,
+                    background: Colors.blue,
+                    btnText: 'Login',
+                    function: () {
+                      print("TEST");
+                    }),
                 const SizedBox(
                   height: 10.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Don\'t Have Account Yet ?',
+                    const Text(
+                      'Don\'t Have Account Yet ?',
                     ),
                     TextButton(
                         onPressed: () {},
                         child: const Text(
                           'Sign Up',
-
                         ))
                   ],
                 )
