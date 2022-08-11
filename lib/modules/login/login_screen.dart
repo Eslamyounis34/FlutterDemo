@@ -7,6 +7,7 @@ import '../../shared/components/components.dart';
 class LoginScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,69 +19,75 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email Address',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.email,
-                    ),
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Login',
+                    style:
+                        TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(
-                        Icons.lock,
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  defaultTextField(
+                      controller: emailController,
+                      type: TextInputType.emailAddress,
+                      text: 'Email',
+                      iconData: Icons.email,
+                      validate: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Email Address must be not empty';
+                        }
+                        return null;
+                      }),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  defaultTextField(
+                      controller: passwordController,
+                      type: TextInputType.number,
+                      text: 'Password',
+                      sufficIcon: Icons.remove_red_eye,
+                      iconData: Icons.lock,
+                      validate: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Password Must be not empty';
+                        }
+                        return null;
+                      }),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  defaultButton(
+                      width: double.infinity,
+                      background: Colors.blue,
+                      btnText: 'Login',
+                      function: () {
+                        if (formKey.currentState!.validate()) {
+                          print("test");
+                        }
+                      }),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Don\'t Have Account Yet ?',
                       ),
-                      suffixIcon: Icon(Icons.visibility_off)),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                defaultButton(
-                    width: double.infinity,
-                    background: Colors.blue,
-                    btnText: 'Login',
-                    function: () {
-                      print("TEST");
-                    }),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Don\'t Have Account Yet ?',
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Sign Up',
-                        ))
-                  ],
-                )
-              ],
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Sign Up',
+                          ))
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
