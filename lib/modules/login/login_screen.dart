@@ -4,10 +4,19 @@ import 'package:flutter/rendering.dart';
 
 import '../../shared/components/components.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
+
+  bool isPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +57,17 @@ class LoginScreen extends StatelessWidget {
                   ),
                   defaultTextField(
                       controller: passwordController,
-                      type: TextInputType.number,
+                      type: TextInputType.visiblePassword,
                       text: 'Password',
-                      sufficIcon: Icons.remove_red_eye,
+                      isPassword: isPassword,
+                      sufficIcon: isPassword ? Icons.visibility :Icons.visibility_off,
                       iconData: Icons.lock,
+                      suffixPressed: () {
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+
+                      },
                       validate: (value) {
                         if (value?.isEmpty ?? true) {
                           return 'Password Must be not empty';

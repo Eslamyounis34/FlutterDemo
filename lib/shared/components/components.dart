@@ -27,15 +27,20 @@ Widget defaultTextField({
   required String text,
   required IconData iconData,
   required String? validate(String? value),
+  bool isPassword = false,
   IconData? sufficIcon,
+  VoidCallback? suffixPressed,
 }) =>
     TextFormField(
-      controller: controller,
-      keyboardType: type,
-      validator: validate,
-      decoration: InputDecoration(
-          labelText: text,
-          border: OutlineInputBorder(),
-          prefixIcon: Icon(iconData),
-          suffixIcon: Icon(sufficIcon)),
-    );
+        controller: controller,
+        keyboardType: type,
+        validator: validate,
+        obscureText: isPassword,
+        decoration: InputDecoration(
+            labelText: text,
+            border: OutlineInputBorder(),
+            prefixIcon: Icon(iconData),
+            suffixIcon: IconButton(
+              icon: Icon(sufficIcon),
+              onPressed: suffixPressed,
+            )));
