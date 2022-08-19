@@ -28,6 +28,7 @@ Widget defaultTextField({
   required IconData iconData,
   required String? validate(String? value),
   bool isPassword = false,
+  VoidCallback? onFormTap,
   IconData? sufficIcon,
   VoidCallback? suffixPressed,
 }) =>
@@ -36,6 +37,7 @@ Widget defaultTextField({
         keyboardType: type,
         validator: validate,
         obscureText: isPassword,
+        onTap: onFormTap,
         decoration: InputDecoration(
             labelText: text,
             border: OutlineInputBorder(),
